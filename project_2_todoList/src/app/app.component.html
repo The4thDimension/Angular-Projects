@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+</head>
+<body>
+  <div>
+    <p>
+      Todo Value
+    <input 
+    type="text"
+    placeholder="Type a todo here"
+    (keyup.enter)="addItem()"
+    [(ngModel)] = "todoValue"
+    />
+    <button
+    (click)="addItem()"
+    >
+    Submit
+  </button>
+    </p>
+
+    <ul>
+      <li *ngFor="let item of list">
+        <input 
+        type="checkbox"
+        name="isDone"
+        [(ngModel)]="item.isDone"
+        />
+        {{item.todoValue}}
+        <button
+        (click)="deleteItem(item.id)"
+        >
+          Delete
+        </button>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
