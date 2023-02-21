@@ -1,0 +1,48 @@
+Basics
+-------
+
+Focus on Single Page Application
+Follows MVC
+write code in Type Script
+Auto generate template
+Packed with a lot of modules(Use modules for almost everything)
+Requirement:
+- Node Js
+- Docs - https://angular.io/docs
+- TypeScirpt - https://www.typescriptlang.org/
+- GitHub - https://github.com/angular/angular
+- Angular CLI(Refer documentation)
+Everything is inserted into the app-root component in html file.
+Every component needs to have a decorator to edify template functionality.
+style affects globally, component.style only affects the component.
+
+Syntax
+-------
+
+To inject a variable into the page, define the variable in the components ts file and use the variable in the components html file.
+To use a variable in the html file, use {{var_name}}
+To create a constructor, just use the method constructor()
+While defining a new model,
+- Create an html component
+- Create a style component
+- Create a model ts file
+  = export interface interface_name{} => This contains definition of the model.
+  = Import the interface into the controller file.
+  = import {} from file_name
+- The controller goes in the component.ts file.
+Most of the angular methods have ng as prefix
+-ngOnInit()
+inside the tag, (click) -> onClick()
+-(click)="fn()"
+(keyup.enter) -> When content is wrote and enter key is pressed.
+You need to import all the modules that you are going to use in the module.ts file.
+-For forms, import {module_name} from "angular/forms";
+-Also, fill the declarations with declarations that you have used and imports with modules you have imported.
+-Import animation while deleting
+-First project
+-SASS
+-Typescript
+Looping - *ngFor="let var of sequence"
+-*ngFor="let item of list"
+Enter value to the model:
+-[(ngModel)]="todoValue"

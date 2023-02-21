@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Submission</title>
+</head>
+<body>
+  <div>
+    <h1>Post Form</h1>
+    <br>
+    <p>
+      <input type="text" class="text-name" [(ngModel)] = "varName" (keyup.enter) = "putName()" >
+    </p>
+    <p>
+      <textarea name="text" id="tareaId" cols="50" rows="5" [(ngModel)] = "varAddr" (keyup.enter)="putAddr()"></textarea>
+    </p>
+    <p>
+      <input type="url" class="img-val" (keyup.enter) = "setIsImg()" [(ngModel)] = "imgUrl">
+    </p>
+    <p>
+      <input type="url" class="url-val" [(ngModel)] = "otherUrl" (keyup.enter) = "setIsUrl()">
+    </p>
+    <p>
+      <input type="checkbox" name="bkg" id="bkg" [(ngModel)] = "isBkg">
+      Add Background
+    </p>
+    <p [class.bkg] = "isBkg">
+      {{ newVarName }}
+    </p>
+    <p>
+      {{ newVarAddr }}
+    </p>
+    <img src="{{imgUrl}}" alt="No Image yet" class="hide" [class.show] = "isImg">
+    <p>
+      <a href="{{ otherUrl }}" class="hide" [class.show] = "isUrl">Click Here</a>
+    </p>
+  </div>
+</body>
+</html>
