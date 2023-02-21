@@ -1,0 +1,19 @@
+.input-component{
+    text-align: center;
+    margin: 5%;
+}
+
+.output-component{
+    text-align: center;
+    margin: 5%;
+}
+
+table{
+    text-align: center;
+    display: inline-block;
+}
+
+tr, th{
+    margin: 50px;
+    padding: 50px;
+}

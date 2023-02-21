@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table</title>
+</head>
+<body>
+  <div class="input-component">
+    <h1 class="head">User Details</h1>
+    <p class="input-name">
+      <input type="text" class="name" placeholder="Enter your name" [(ngModel)] = "name">
+    </p>
+    <p class="input-mail-id">
+      <input type="email" class="id" placeholder="Enter your email id" [(ngModel)] = "emailId">
+    </p>
+    <p class="input-address">
+      <textarea cols="50" rows="5" class="addr" placeholder="Enter your address" [(ngModel)] = "address"></textarea>
+    </p>
+    <p class="input-submit">
+      <button class="submit" (click) = "pushData()">Submit</button>
+    </p>
+  </div>
+  <div class="output-component">
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+      <tr *ngFor = "let person of people">
+
+        <td>{{person.id}}</td>
+        <td>{{person.name}}</td>
+        <td>{{person.emailId}}</td>
+        <td>{{person.address}}</td>
+        <td><button (click) = "deleteVal(person.id)">Delete</button></td>
+
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

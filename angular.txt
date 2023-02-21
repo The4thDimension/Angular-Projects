@@ -2,29 +2,50 @@ Basics
 -------
 
 Focus on Single Page Application
+
 SPA- Don't need to reload the page during it's use.
+
 Follows MVC
+
 write code in Type Script
+
 Auto generate template
+
 Packed with a lot of modules(Use modules for almost everything)
+
 Requirement:
 - Node Js
 - Docs - https://angular.io/docs
 - TypeScirpt - https://www.typescriptlang.org/
 - GitHub - https://github.com/angular/angular
 - Angular CLI(Refer documentation)
+
 Everything is inserted into the app-root component in html file.
+
 Every component needs to have a decorator to edify template functionality.
+
 style affects globally, component.style only affects the component.
+
 It is a good practice to create all the components inside the app folder.
+
 It is a good practice to give app- as a prefix to angular component selectors.
+
+Angular have a change detection mechanism that will identify and implement all the changes in the DOM in real time without reloading.
+
+Angular directives - Component, structural, attribute, custom
+-Structural directives - Shape the DOM by adding or removing elements.
+ =Can be identified by leading * symbol.
+-Attribute directives - Change the appearence of DOM elements
 
 Syntax
 -------
 
 To inject a variable into the page, define the variable in the components ts file and use the variable in the components html file.
+
 To use a variable in the html file, use {{var_name}}
+
 To create a constructor, just use the method constructor()
+
 While defining a new model,
 - Create an html component
 - Create a style component
@@ -33,58 +54,105 @@ While defining a new model,
   = Import the interface into the controller file.
   = import {} from file_name
 - The controller goes in the component.ts file.
+
 Most of the angular methods have ng as prefix
 -ngOnInit()
+
 inside the tag, (click) -> onClick()
 -(click)="fn()"
+
 (keyup.enter) -> When content is wrote and enter key is pressed.
+
 You need to import all the modules that you are going to use in the module.ts file.
 -For forms, import {module_name} from "angular/forms";
 -Also, fill the declarations with declarations that you have used and imports with modules you have imported.
 -Import animation while deleting
+
 Looping - *ngFor="let var of sequence"
 -*ngFor="let item of list"
+
 To assign a class to an element, use [class]
 -<p [class] = "example-class">
+
 To import a component, put this in the main component - import class_name from 'path'
 -Also add export keyword before the class defn
+
 To put a component inside an angular pgm, put an html element inside the parent component and give that element as the selector for the new component.
 While adding a new component, inside the component decorator, add a tag called template, to add html code. Add a tag called styles to add css code.
 -To give src file, use templateUrl instead of template and styleUrl instead of style.
+
 ng g c comp_name -> Create component
+
 @Input decorator - used to share data between parent to child component
 -In the child slot tag of the parent component html sheet, add the attribute,
  =[fromParent]="variable_name"
 -In the child component, import input module.
 -Use the decorator inside the class
  =@Input() fromParent: data_type;
+
 @viewChild - used to share data between child to parent component
 -Import viewChild module in the parent component
 -Use the decorator inside the class
  =@viewChild(data) var_name;
+
 AfterViewInit - Will be executed once the view is initialized.
 -import AfterViewInit from core
 -class implements AfterViewInit
 -AfterViewInit(){}
+
 With the viewChild decorator, you can pull the whole items of a component.
+
 @output Decorator and event Emitter - Pass data between child to parent component when there is an event.
 -Import output and EventEmitter in the component
 -output messageEvent = new EventEmitter <string>()
 -this.messageEvent.emit(this.outputChildMessage)
 -In the parent html slot, add this attribute
  = (messageEvent)='receiveMessage($event)'
+
 Property Binding - put an attribute inside sq brackets and pass a variable as value.
 -[src] = "imgUrl"
+
 Class binding - A class is activated only when the given boolean value is true.
 -[class.class_name] = boolean_variable
+
 Inline style binding - Give style and value
 -[style.style] = "boolean_variable ? 'value1' : 'value2'";
 -Only pass DOM style object properties and values.
+
 For event binding, use () and for data binding, use []
+
 In event binding, we can pass the event in the fn, $event. Inside the event variable, there will be all the info about the event.
 -To find out which key in pressed on keyup event, check the key code with $event.keyCode
 -To get value from event obj, $event.target.value
+
 To create a template variable, use the #var_name as an attribute in an html input tag.
 -<input #username>
 -You can pass the value directly as a parameter by using a template variable.
  =onInput(username.value)
+
+Angular Directive - Used to manipulate the DOM, but they don't have a view.
+
+To display an object in the view, we need to specify the type along with it.
+-{{obj | json}}
+
+While defining a *ngFor loop, we can keep track of the index number
+-*ngFor = "let post of objArray, let i = index"
+
+*ngIf -> If statement
+-This could be put inside a tag, in which case the tag would be visible iff the condition returns true.
+-<div *ngIf = "array.length > 0;then postList else noData">
+ =Where postList and noData is a template variable of an <ng-template> tag
+ =We can only use the <ng-template> tag with a structural directive.
+
+ngSwitch -> Switch statement
+-In a parent div with several child elements, we can use switch case operations associated with a variable
+ =<div [ngSwitch] = "var_name"> => Parent
+ =<div *ngSwitchCase = "condition_1"> => child
+ =<div *ngSwitchDefault> => Default case
+
+NgStyle -> To give multiple styles dynamically based on condition
+-[NgStyle] = "{color: isActive ? 'Red' : 'Black'}"
+
+ngClass -> To bing multiple class to same element based on condition
+-[ngClass] = "{'class_name': condition}"
+
