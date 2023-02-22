@@ -22,7 +22,7 @@
       <button class="submit" (click) = "pushData()">Submit</button>
     </p>
   </div>
-  <div class="output-component">
+  <div class="output-component" *ngIf = "people.length > 0; else noData">
     <table>
       <tr>
         <th>#</th>
@@ -42,5 +42,9 @@
       </tr>
     </table>
   </div>
+
+  <ng-template #noData >
+    <h4>No Data Found</h4>
+  </ng-template>
 </body>
 </html>
