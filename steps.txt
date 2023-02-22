@@ -1,0 +1,13 @@
+1. Create a new angular app
+2. Clean the app and open it
+3. Create header component
+4. Create category nav-bar component
+5. Create footer component
+6. Create home page component
+7. Create single category component
+8. Create single post component
+9. Create terms and conditions component
+10. Create contact us component
+11. Create subscription form component
+12. Create comment-form component
+13. Create comment-list component

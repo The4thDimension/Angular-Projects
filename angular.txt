@@ -36,6 +36,14 @@ Angular directives - Component, structural, attribute, custom
 -Structural directives - Shape the DOM by adding or removing elements.
  =Can be identified by leading * symbol.
 -Attribute directives - Change the appearence of DOM elements
+-The number pipe converts a number into end user readable form
+-Currency pipe will add currency symbol
+-Percent pipe will multiply given number by 100, round, and give us the percentage.
+ =We can control the decimal and integer numbers.
+
+Angular Service - Used to share data between components where there is no parent-child relationship
+
+Form types in angular - template driven form(use ngForm) and reactive form(Hand code from scratch)
 
 Syntax
 -------
@@ -156,3 +164,113 @@ NgStyle -> To give multiple styles dynamically based on condition
 ngClass -> To bing multiple class to same element based on condition
 -[ngClass] = "{'class_name': condition}"
 
+| - Pipe operator.
+-var_name | uppercase
+-With number pipe, we can pass int count and min and max dec count.
+ =var_name | number: 'int_count.min_dec_count-max_dec_count'
+-With currency pipe, we can pass currency code.
+ =var_name | currency: 'currency_code': bool_value: 'int_count.min_dec_count-max_dec_count'
+ =If bool_value is true, currency symbol is displayed. Otherwise, currency code is displayed.
+-With date pipe, we can pass an argument
+ =var_name | date: 'arg'
+ =To get the arg list and properties, visit ang official documentation.
+-We cannot directly display an object in the view. For that, we need to convert it to json
+
+To create an array,
+-var_name: Array<data_type>
+
+Use the slice pipe to slice an array
+-array_name | slice : start_index : end_index
+
+To create a custom pipe,
+-Create a folder inside app folder
+-create the pipe file with pipe.ts as postfix
+-import Pipe and PipeTransform
+-Create a decorator and pass the pipe name
+ =@Pipe({name: "append"})
+-Create a type script class implements PipeTransform
+ =This must have the method transform
+-The transform method must have value: any parameter and optionally can have an args: any parameter
+ =To specify that the args are optional, put a question mark in the defn
+-Registor in the module.ts
+
+In the CLI, add the commmand
+-ng g pipe path/pipe_name
+-To generate a custom pipe
+
+string_var.substring(first_index, last_index)
+
+To create a service,
+-Create a folder
+-Create a service file with .service.ts extension
+-Create a class and put data and methods in it that you want to share
+-Import this inside the component
+
+Dependancy injection - We can manage the dependancy by directly assigning the service instance to a variable while calling the constructor by using a parameter.
+-constructor(private postService: PostService)
+-For this to work, add the key-value, providers: [class_name] in the @component decorator in the component.ts file.
+ =This is to specify to angular that this is an injectable class
+ =Instead of this, you can specify this in the app.module.ts file to make it reflect globally instead of repeating it for each component
+-Otherwise, we can add an injector decorator to the service so that it is injectable for all components.
+ =Import Injectable in the service
+ =Add Injectable decorator
+ =Add key, provideIn and value, 'root'
+ =@Injectable({provideIn: 'root'})
+
+To create service using the angular cli
+-ng g s path/file_name
+
+Interface - Used to create a blueprint of an object for debugging
+-Put all interfaces in models folder
+-CLI - ng g i path/interface_name
+-Inside the interface, all keys become required.
+ =To make a key optional, add a question mark after the key name
+
+For template driven form submission, create a template variable for the form tag and assign it the value of ngForm.
+-Create an even (submit) and pass the template variable in the function.
+-<form #f = 'ngForm' (submit) = 'onSubmit(f)'>
+-while defining the function, make the variable type as ngForm
+-We get a dictionary of every details regarding ngForm on f.
+
+formGroup class - form tag
+-formControl class - each fields
+
+To create instance of formGroup and formControl class, 
+-Use the ngForm syntax in the form tag
+-Use the ngModel in the fields
+-To use ngModel inside form tag, name attribute is mandatory.
+-Once it is done, the template variable will have the values as key-value pairs where keys are the names of the corresponding tags.
+-<input ngModel>
+
+FormControl has two attributes called valid and invalid. We can check the validity of a form using these. If a form is set to required,
+-If there is no value, it is invalid and there is value, it is valid.
+
+FormControl has a property called touched which becomes true when the user accesses a field and moves away
+
+&& - And operator
+
+Angular adds css class to items, and we can find it in the inspector and use it
+
+FormControl has a property called errors within which you can find all the errors.
+
+For form submission, angular has a directive, ngSubmit
+
+Use the disabled property in property binding to disable a certain element if it meets a certain condition
+-[disabled] = 'f.invalid'
+
+To use reactive forms,
+-import ReactiveForms module
+-import FromGroup and FormControl
+-Create an instance of FormGroup and pass an object with key-value for each of the elements in the form
+ =As values, create a FormControl instance for each of the keys.
+-Use property binding to attch this object with the actual form
+ =Use formGroup property for the process
+ =<form formGroup = 'form'>
+-Also, assign each key in the FormControl object to the relevent elements of the form using formControlName property
+ =formControlName = 'fullName'
+-We can pass parameters from FormControl instance to find the errors
+ =We need to pass an empty string as a default value
+ =new FormControl('', validators.required)
+
+To get value from a form, we can write a getter method
+-get method_name(){ return this.form.get('key_name')}

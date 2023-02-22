@@ -1,0 +1,3 @@
+1. Create a new angular app(In CLI) - ng new app_name
+2. Run the angular app(In CLI) - ng serve
+3. Create a new component(In CLI) - ng g c path/component_name
