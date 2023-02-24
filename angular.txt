@@ -45,6 +45,17 @@ Angular Service - Used to share data between components where there is no parent
 
 Form types in angular - template driven form(use ngForm) and reactive form(Hand code from scratch)
 
+Routing - Navigating between pages.
+-Steps to implement angular routing:
+ =Configure the routes
+ =Add Router-Outlet
+ =Add Navigation link paths
+
+Observable - Sequence of data that is emitted asynchronously or synchronously over a period of time.
+
+Synchronous program - Code executed in a sequence
+-Asynchronous program - Does not have to wait for the previous code to finish execution
+
 Syntax
 -------
 
@@ -274,3 +285,80 @@ To use reactive forms,
 
 To get value from a form, we can write a getter method
 -get method_name(){ return this.form.get('key_name')}
+
+We can create form group inside form group in reactive form group
+-Put all the required fields into a div and add the formGroupName attribute to the div.
+
+We can store multiple values from form where number of values is unknown. For that, create a FormArray.
+-skills: new FormArray([]);
+-inside the FormGroup and push values as we get them.
+-To push values, add a method and pass the parameter. 
+-Write a getter for this value, and make it as FormGroup and push it to the Array
+-(this.form.get('skills') as FormArray).push( new FormControl(skills.value) )
+-Use the removeAt() method and pass the index to remove an element from FormArray.
+
+Use FormBuilder to optimise your code.
+-Inside the constructor, create a FormBuilder.
+ =constructor(fb: FormBuilder)
+-You can create group, control or array using fb var.
+ =fb.group/control/array
+ =fb.group({ key: ['', validators.required] })
+ =[] - represents a new instance of FormControl being created
+ =To create an array, skills: fb.array([])
+-Using FormBuilder, we can return all the formControls with single getter method.
+ =get fc(){ return this.form.controls }
+
+To create a custom validator,
+-Create a folder and inside, create file with .validators.ts as extension
+ =import AbstractControl and ValidationErrors modules
+ =set control with type as AbstractControl as parameter
+ =set ValidationErrors | null as return type
+ =get control.value as req type
+ =Create the method as static to avoid creating an instance of the class for accessing the method
+ =Export the class
+ =Return a key: true if there is an issue and null otherwise
+ =export class SpaceValidator{ static spaceValidator(control: AbstractControl): ValidationErrors | null{ val = control.value as string; return { noSpaceValidator: true; } } }
+-Import in the component
+
+To use angular routing mechanism,
+-Import RouterModule 
+-Add RouterModule in the imports
+-Add a method forRoot() and define path and components for routing.
+-We can add a parameter to the path as well
+ =RouterModule.forRoot([{path: 'posts/:id', component: PostListComponent}])
+ =This component will be loaded when this path is accessed
+-Create a router-outlet tag in the parent component
+-Add routerLink attribute to an html element to route to a path when that element is clicked
+ =<button [routerLink] = "['/post', index]"
+ =Set routerLink to "/" to navigate back to the home page.
+-Put an attribute, routerLinkActive and pass a class to an html element with routerLink to modify active state.
+-To capture the router parameter, add ActivatedRoute module
+ =In the constructor, add an instance of the activated route as private
+ =private route: ActivatedRoute
+ =paramMap - Used to get the parameters.
+ =This only works if we use the method subscribe
+ =The subscribe method takes a method as input.
+ =this.route.paramMap.subscribe(value => { let id = value.get('id') }
+
+Time out function is used to wait for a certain period of time before execution.
+-It accepts a function and time in ms as parameters.
+-setTimeOut( () => { console.log('Timeout') }, 2000);
+
+Query parameter - Optional router parameter
+-For this, add another attribute, [queryParams] = {values}
+-To catch the parameters, use this.route.queryParamMap
+
+It is better to put all routing operations in a seperate file
+-For this, add a routing module and associate it with a module
+ =ng g module module_name --module module_name --flat
+ =The --flat will create the module in the root folder itself
+-Inside the module, import RouterModule
+-Add RouterModule as exports
+-and define RouterModule.forRoot() in imports
+
+To use routing inside a fn in a component,
+-Add Router service in the component
+-Inside the method, use this.router.navigate(path)
+
+Wild card routing - Create a component. Give path as '**' and target as this component
+-Always add wild card router at the end of the router list
